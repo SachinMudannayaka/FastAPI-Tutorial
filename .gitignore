@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# macOS files
+.DS_Store
+
+# Virtual environment (your FastAPI env folder)
+fastapitute/
+
+# node_modules/
