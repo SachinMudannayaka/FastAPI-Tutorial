@@ -74,4 +74,10 @@ def update_book(book_id: int,book_update:BookUpdate):
             return book
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Book Not Found")      
 
-
+@app.delete("/delete/book/{book_id}")
+def delete_book(book_id:int):
+    for book in books:
+        if book['id'] == book_id:
+            books.remove(book)
+            return{"Messege":"Book is deleted"}
+    return HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Book Not Found")        
