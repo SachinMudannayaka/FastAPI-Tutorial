@@ -11,7 +11,7 @@ class BookStore(BaseModel):
     title:str
     author: str
     publish_date:str
-
+#Add book
 @app.post("/create/book")
 def create_book(book:BookStore, db:session = Depends(get_db)):
     new_book = model.Book(id=book.id,title=book.title,author= book.author,publish_date = book.publish_date)
@@ -19,3 +19,10 @@ def create_book(book:BookStore, db:session = Depends(get_db)):
     db.commit()
     db.refresh(new_book)
     return(new_book)
+
+#Get All books
+@app.get("/")
+def get_book(db:session = Depends(get_db)):
+    books = db.query(model.Book).all()
+    return books
+    
