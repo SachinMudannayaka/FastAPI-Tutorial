@@ -123,3 +123,15 @@ def require_roles(allowed_roles:list[str]):
             raise HTTPException(status_code=status.Http_403,detail="Not enough Permission")
         return current_user
     return role_checker
+
+@app.get("/profile")
+def profile(current_user:dict = Depends(require_roles(['user','admin']))):
+    return{"Messege":f"Profile of {current_user['username']} {current_user['role']}"}
+
+@app.get("/user/dashboard")
+def userDashboard(current_user:dict= Depends(require_roles(["user"]))):
+    return("Welcome User")
+
+@app.get("/admin/dashboard")
+def userDashboard(current_user:dict= Depends(require_roles(["admin"]))):
+    return("Welcome Admin")
